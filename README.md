@@ -1,3 +1,5 @@
+DDCoin 1.0.0.1 BETA
+====================
 Copyright © 2009-2015 The Bitcoin developers
 Copyright © 2011-2012 The PPCoin Developers
 Copyright © 2014 The Peerunity Developers
