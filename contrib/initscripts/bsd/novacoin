@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# PROVIDE: DDCoin
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# DDCoin_enable (bool): Set to NO by default. Set this variable to YES if you want to enable DDCoin service.
+# DDCoin_config (path): Set to /usr/local/etc/DDCoin.conf by default.
+# DDCoin_user:  The user account DDCoin daemon runs as. It uses 'root' user by default.
+# DDCoin_group: The group account DDCoin daemon runs as. It uses 'wheel' group by default.
+# DDCoin_datadir (str): Default to "/var/db/DDCoin". Base data directory.
+
+. /etc/rc.subr
+
+name=DDCoin
+rcvar=DDCoin_enable
+
+: ${DDCoin_enable:=NO}
+: ${DDCoin_config=/usr/local/etc/DDCoin.conf}
+: ${DDCoin_datadir=/var/db/DDCoin}
+: ${DDCoin_user="root"}
+: ${DDCoin_group="wheel"}
+
+required_files=${DDCoin_config}
+command=/usr/local/bin/DDCoind
+DDCoin_chdir=${DDCoin_datadir}
+pidfile="${DDCoin_datadir}/DDCoind.pid"
+stop_cmd=DDCoin_stop
+command_args="-conf=${DDCoin_config} -datadir=${DDCoin_datadir} -daemon -pid=${pidfile}"
+start_precmd="${name}_prestart"
+
+DDCoin_create_datadir()
+{
+	echo "Creating data directory"
+	eval mkdir -p ${DDCoin_datadir}
+	[ $? -eq 0 ] && chown -R ${DDCoin_user}:${DDCoin_group} ${DDCoin_datadir}
+}
+
+DDCoin_prestart()
+{
+	if [ ! -d "${DDCoin_datadir}/." ]; then
+		DDCoin_create_datadir || return 1
+	fi
+}
+
+DDCoin_requirepidfile()
+{
+	if [ ! "0`check_pidfile ${pidfile} ${command}`" -gt 1 ]; then
+		echo "${name} not running? (check $pidfile)."
+		exit 1
+	fi
+}
+
+DDCoin_stop()
+{
+    DDCoin_requirepidfile
+
+	echo "Stopping ${name}."
+	eval ${command} -conf=${DDCoin_config} -datadir=${DDCoin_datadir} stop
+	wait_for_pids ${rc_pid}
+}
+
+load_rc_config $name
+run_rc_command "$1"

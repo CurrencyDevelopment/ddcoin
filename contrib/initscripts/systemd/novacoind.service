@@ -1,0 +1,11 @@
+[Unit]
+Description=DDCoin daemon serivce
+After=network.target
+
+[Service]
+Type=simple
+User=DDCoin
+ExecStart=/opt/DDCoin/DDCoind
+
+[Install]
+WantedBy=multi-user.target
