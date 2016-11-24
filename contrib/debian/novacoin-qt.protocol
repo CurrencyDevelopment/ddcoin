@@ -1,0 +1,11 @@
+[Protocol]
+exec=DDCoin-qt '%u'
+protocol=DDCoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

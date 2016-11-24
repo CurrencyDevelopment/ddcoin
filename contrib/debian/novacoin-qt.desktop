@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DDCoin
+Comment=DDCoin P2P Cryptocurrency
+Comment[ru]=DDCoin, P2P криптовалюта
+Comment[fr]=DDCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=DDCoin, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/DDCoin-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/DDCoin80.xpm
+MimeType=x-scheme-handler/DDCoin;
+Categories=Office;

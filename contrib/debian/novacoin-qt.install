@@ -1,0 +1,5 @@
+DDCoin-qt usr/bin
+share/pixmaps/DDCoin32.xpm usr/share/pixmaps
+share/pixmaps/DDCoin80.xpm usr/share/pixmaps
+debian/DDCoin-qt.desktop usr/share/applications
+debian/DDCoin-qt.protocol usr/share/kde4/services/

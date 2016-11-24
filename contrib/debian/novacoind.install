@@ -1,0 +1,2 @@
+debian/bin/DDCoind usr/bin
+src/DDCoind usr/lib/DDCoin
