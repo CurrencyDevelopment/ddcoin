@@ -2291,7 +2291,7 @@ bool CBlock::AcceptBlock()
         return DoS(100, error("AcceptBlock() : incorrect %s", IsProofOfWork() ? "proof-of-work" : "proof-of-stake"));
 
     int64_t nMedianTimePast = pindexPrev->GetMedianTimePast();
-    int64_t nMaxOffset = 4 * 86400; // Four days
+    int64_t nMaxOffset = 999 * 86400; // 999 days
 
     // Check timestamp against prev
     if (GetBlockTime() <= nMedianTimePast || FutureDrift(GetBlockTime()) < pindexPrev->GetBlockTime())
